@@ -1,6 +1,7 @@
 #include "my_string.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define INITIAL_CAPACITY 16
 
@@ -65,7 +66,6 @@ void my_string_append_cstr(my_string *str, const char *cstr) {
     while (str->length + cstr_len >= str->capacity) {
         my_string_reserve(str, str->capacity * 2);
     }
-    
     strcpy(str->data + str->length, cstr);
     str->length += cstr_len;
 }
