@@ -16,6 +16,18 @@ my_string my_string_create(void) {
     return str;
 }
 
+my_string my_string_create_with_capacity(size_t initial_capacity)
+{
+    my_string str;
+    str.capacity = initial_capacity;
+    str.length = 0;
+    str.data = (char *)malloc(str.capacity);
+    if (str.data != NULL) {
+        str.data[0] = '\0';
+    }
+    return str;
+}
+
 my_string my_string_from_cstr(const char *cstr) {
     my_string str = my_string_create();
     if (cstr != NULL) {
@@ -124,4 +136,29 @@ void my_string_print(const my_string *str) {
     if (str != NULL && str->data != NULL) {
         printf("%s\n", str->data);
     }
+}
+
+size_t my_strlen(const char *cstr)
+{
+    size_t len = 0;
+    if (cstr != NULL) {
+        while (cstr[len] != '\0') {
+            len++;
+        }
+    }
+    return len;
+}
+
+int my_strcmp(const char *str1, const char *str2)
+{
+    while (*str1 && (*str1 == *str2)) {
+        str1++;
+        str2++;
+    }
+    return *(unsigned char *)str1 - *(unsigned char *)str2;
+}
+
+void my_strcpy(char *dest, const char *src)
+{
+    while ((*dest++ = *src++) != '\0');
 }

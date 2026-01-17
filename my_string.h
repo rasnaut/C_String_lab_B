@@ -14,6 +14,8 @@ typedef struct {
  */
 my_string my_string_create(void);
 
+my_string my_string_create_with_capacity(size_t initial_capacity);
+
 /**
  * Создает строку из С-строки
  */
@@ -65,5 +67,10 @@ void my_string_clear(my_string *str);
 my_string my_string_copy(const my_string *src);
 
 void my_string_print(const my_string *str);
+
+
+size_t my_strlen(const char *cstr);
+int my_strcmp(const char *str1, const char *str2);
+void my_strcpy(char *dest, const char *src);
 
 #endif // MY_STRING_H

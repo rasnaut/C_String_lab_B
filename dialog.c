@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <readline/readline.h>
+#include "reorder_words.h"
 
 #define BUFFER_SIZE 4096
 
@@ -26,12 +28,17 @@ my_string my_readline(void) {
 }
 
 void run_dialog(void) {
-    printf("Введите строки (Ctrl+D для завершения):\n\n");
-    
+
     while (1) {
+        printf("Введите строки (Enter для завершения):\n\n");
         // Читаем входную строку
-        my_string input = my_readline();
-        
+        //my_string input = my_readline();
+        my_string input = my_string_from_cstr(readline("Введите строку: "));
+        if (input.length == 0) {
+            // Пустая строка или ошибка чтения
+            my_string_destroy(&input);
+            break;
+        }
         // Проверяем EOF
         if (feof(stdin)) {
             my_string_destroy(&input);
@@ -46,6 +53,8 @@ void run_dialog(void) {
         
         // Выводим выходную строку в кавычках
         printf("Выходная: \"%s\"\n", my_string_cstr(&output));
+        reorder_words(&output);
+        printf("Преобразованная: \"%s\"", my_string_cstr(&output));
         printf("\n");
         
         // Освобождаем память

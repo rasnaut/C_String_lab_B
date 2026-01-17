@@ -1,22 +1,22 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99 -g
+CFLAGS = -Wall -Wextra -std=c99 -g 
 TARGET = main
 TEST_MY_STRING = test_my_string
 TEST_STRING_PROCESSING = test_string_processing
 
 # Object files
-OBJS = my_string.o string_processing.o dialog.o
+OBJS = my_string.o reorder_words.o string_processing.o dialog.o
 
 # Source files
-SOURCES = my_string.c string_processing.c dialog.c
-HEADERS = my_string.h string_processing.h dialog.h
+SOURCES = my_string.c reorder_words.c string_processing.c dialog.c 
+HEADERS = my_string.h reorder_words.h string_processing.h dialog.h
 
 .PHONY: all clean test run
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS) main.c $(HEADERS)
-	$(CC) $(CFLAGS) $(OBJS) main.c -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJS) main.c -o $(TARGET) -lreadline
 
 my_string.o: my_string.c my_string.h
 	$(CC) $(CFLAGS) -c my_string.c -o my_string.o
