@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <readline/readline.h>
 #include "reorder_words.h"
 
 #define BUFFER_SIZE 4096
@@ -30,10 +29,10 @@ my_string my_readline(void) {
 void run_dialog(void) {
 
     while (1) {
-        printf("Введите строки (Enter для завершения):\n\n");
+        printf("Введите строки (Ctrl + D для завершения):\n\n");
         // Читаем входную строку
-        //my_string input = my_readline();
-        my_string input = my_string_from_cstr(readline("Введите строку: "));
+        my_string input = my_readline();
+        //my_string input = my_string_from_cstr(readline("Введите строку: "));
         if (input.length == 0) {
             // Пустая строка или ошибка чтения
             my_string_destroy(&input);

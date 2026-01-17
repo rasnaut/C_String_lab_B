@@ -79,8 +79,8 @@ void reorder_words(my_string *str) {
     } else {
         result_string_ptr = &remaining;
     }
-       
-    strcpy(str->data, result_string_ptr->data);
+    
+    my_strcpy(str->data, result_string_ptr->data);
     
     my_string_destroy(&words_to_move);
     my_string_destroy(&remaining);
