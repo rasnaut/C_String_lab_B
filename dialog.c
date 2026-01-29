@@ -14,7 +14,7 @@ my_string my_readline(void) {
     // Читаем строку через scanf с форматом для чтения всей строки до перевода строки
     if (scanf(" %4095[^\n]", buffer) != 0) {
         // Удаляем символ конца строки, если он есть
-        size_t len = strlen(buffer);
+        size_t len = my_strlen(buffer);
         printf("Line size: %ld\n", len); // Debug print
         if (len > 0 && buffer[len - 1] == '\n') {
             buffer[len - 1] = '\0';
@@ -33,13 +33,8 @@ void run_dialog(void) {
         // Читаем входную строку
         my_string input = my_readline();
         //my_string input = my_string_from_cstr(readline("Введите строку: "));
-        if (input.length == 0) {
+        if (input.length == 0 || feof(stdin)) {
             // Пустая строка или ошибка чтения
-            my_string_destroy(&input);
-            break;
-        }
-        // Проверяем EOF
-        if (feof(stdin)) {
             my_string_destroy(&input);
             break;
         }

@@ -72,7 +72,7 @@ void my_string_append_cstr(my_string *str, const char *cstr) {
     if (str == NULL || str->data == NULL || cstr == NULL) {
         return;
     }
-    
+
     size_t cstr_len = my_strlen(cstr);
     while (str->length + cstr_len >= str->capacity) {
         my_string_reserve(str, str->capacity * 2);
@@ -141,7 +141,7 @@ size_t my_strlen(const char *cstr)
 {
     size_t len = 0;
     if (cstr != NULL) {
-        while (cstr[len] != '\0') {
+        while (cstr[len] != '\0' && cstr[len] != 0) {
             len++;
         }
     }
