@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra -std=c99 -g
 TARGET = main
 TEST_MY_STRING = test_my_string
 TEST_STRING_PROCESSING = test_string_processing
+TEST_BIG_STING_TIME = test_big_string_time
 
 # Object files
 OBJS = my_string.o reorder_words.o string_processing.o dialog.o
@@ -33,7 +34,10 @@ test_my_string: my_string.o my_string_test_main.c
 test_string_processing: my_string.o string_processing.o string_processing_test_main.c
 	$(CC) $(CFLAGS) my_string.o string_processing.o string_processing_test_main.c -o $(TEST_STRING_PROCESSING)
 
-test: test_my_string test_string_processing
+test_big_string_time: my_string.o string_processing.o reorder_words.o big_string_time_test.c
+	$(CC) $(CFLAGS) my_string.o string_processing.o reorder_words.o big_string_time_test.c -o $(TEST_BIG_STING_TIME)
+
+test: test_my_string test_string_processing test_big_string_time
 	@echo "Running my_string tests..."
 	./$(TEST_MY_STRING)
 	@echo ""
@@ -53,7 +57,7 @@ valgrind_test_string_processing: test_string_processing
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TEST_STRING_PROCESSING)
 
 clean:
-	rm -f *.o $(TARGET) $(TEST_MY_STRING) $(TEST_STRING_PROCESSING)
+	rm -f *.o $(TARGET) $(TEST_MY_STRING) $(TEST_STRING_PROCESSING) $(TEST_BIG_STING_TIME)
 
 help:
 	@echo "Available targets:"

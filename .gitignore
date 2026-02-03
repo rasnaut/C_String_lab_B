@@ -1,4 +1,5 @@
 test_my_string
 test_string_processing
+test_big_string_time
 main
 *.o
