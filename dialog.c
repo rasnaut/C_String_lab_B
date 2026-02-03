@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "reorder_words.h"
+#include <time.h>
 
 #define BUFFER_SIZE 4096
 
@@ -39,19 +40,22 @@ void run_dialog(void) {
             break;
         }
         
-        // Обрабатываем строку
+        clock_t t0 = clock();
         my_string output = process_string(&input);
+        clock_t t1 = clock();
         
-        // Выводим входную строку в кавычках
         printf("Входная:  \"%s\"\n", my_string_cstr(&input));
-        
-        // Выводим выходную строку в кавычках
         printf("Выходная: \"%s\"\n", my_string_cstr(&output));
+        clock_t t3 = clock();
         reorder_words(&output);
+        clock_t t4 = clock();
         printf("Преобразованная: \"%s\"", my_string_cstr(&output));
+        double time_spent = (double)(t1 - t0) / CLOCKS_PER_SEC;
+        double time_spent_reorder = (double)(t4 - t3) / CLOCKS_PER_SEC;
+        printf("\nВремя обработки: %.6f секунд\n", time_spent);
+        printf("Время перестановки слов: %.6f секунд\n", time_spent_reorder);
         printf("\n");
         
-        // Освобождаем память
         my_string_destroy(&input);
         my_string_destroy(&output);
     }

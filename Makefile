@@ -16,7 +16,7 @@ HEADERS = my_string.h reorder_words.h string_processing.h dialog.h
 all: $(TARGET)
 
 $(TARGET): $(OBJS) main.c $(HEADERS)
-	$(CC) $(CFLAGS) $(OBJS) main.c -o $(TARGET) -lreadline
+	$(CC) $(CFLAGS) $(OBJS) main.c -o $(TARGET)
 
 my_string.o: my_string.c my_string.h
 	$(CC) $(CFLAGS) -c my_string.c -o my_string.o
